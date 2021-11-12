@@ -18,7 +18,9 @@ body, html{
 #header{
     height: 60px;
     width: 100%;
-    padding: 5px;
+    padding-top: 10px;
+    padding-left:10px;
+    box-sizing: border-box;
     color: white;
     font-size: 24px;
     display: flex;
@@ -32,16 +34,144 @@ body, html{
     width: 100%;
     display: flex;
     flex-direction: row;
-    background-image: linear-gradient(to right, rgb(255, 244, 210), white);
 }
+
+/* NavBar Styles Section */
 
 #sidebarBox{
     height: 100%;
-    width: 30%;
-    border: 0.5px grey solid;
+    width: 25%;
+    background-color: rgb(202, 202, 202);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
+
+#listDisplay{
+    height: 50%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+#defaultProjectList{
+    margin-top: 10px;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+#userProjects{
+    height:70%;
+    display: flex;
+    flex-direction: column;
+}
+
+#userProjectsLists{
+    height:80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.navButton{
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    background-color: rgb(202, 202, 202);
+    height: 30px;
+    width: 100%;
+    text-align: left;    
+}
+
+.navButton:hover{
+    background-color: rgb(139, 139, 139);
+}
+
+/* Display Box Styles Section */
 
 #displayBox{
     height: 100%;
-    width: 70%;
+    width: 75%;
+    background-color: rgb(231, 231, 231);
+    display: flex;
+    justify-content: center;
+    
+}
+
+#taskListDisplay{
+    height: 80%;
+    width: 90%;
+    margin-top: 5%;
+    vertical-align: top;
+}
+
+#taskDisplayHeader{
+    margin-bottom: 3%;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#addTaskButton{
+    border: .5px solid gray;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: rgb(202, 202, 202);
+    height: 30px;
+    width: 90px;
+    text-align: left; 
+}
+
+#addTaskButton:hover{
+    background-color: rgb(139, 139, 139);
+}
+
+/* task dislpay styles section */
+
+.taskDisplay{
+    height: 25px;
+    width: 100%;
+    text-align: left;
+    display: grid;
+    border-radius: 5px;
+    border: 1px solid rgb(255, 255, 255);
+    grid-template-columns: .5fr 1fr 5fr 2fr 1fr;
+    vertical-align: middle;
+}
+
+.taskPriority{
+    height: 100%
+}
+
+.low{
+    background-color: green;
+}
+
+.medium{
+    background-color: yellow;
+}
+
+.high{
+    background-color: red;
+}
+
+.taskCompletion{
+    height: 100%;
+}
+
+.taskTitle{
+    height: 100%;
+    font-size: 14px;
+}
+
+.taskDueDate{
+    height: 100%;
+}
+
+.taskEditor{
+    height:100%;
 }

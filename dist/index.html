@@ -5,9 +5,24 @@
   </head>
   <body>
     <div id='layout'>
-        <div id='header'>Do it</div>
+        <div id='header'>   Task</div>
         <div id='contentContainer'>
-            <div id='sidebarBox'></div>
+            <nav id='sidebarBox'>
+              <div id='listDisplay'>
+                <div id='defaultProjectList'>
+                    <button class='navButton list' data-index='0'>All</button>
+                    <button class='navButton list' data-index='1'>Today</button>
+                    <button class='navButton list' data-index='2'>This Week</button>
+                </div>
+                <div id='userProjects'>
+                  <div>
+                    <h2>Projects/Lists</h2>
+                  </div>
+                  <div id='userProjectsList'></div>
+                  <button class='navButton' id='addProjectButton'>+  Add Project/List</button>
+                </div>
+              </div>
+            </nav>
             <div id='displayBox'></div>
         </div>
     </div>
