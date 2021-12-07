@@ -8,7 +8,7 @@ class DisplayController {
         this.projectCompiler = new ProjectCompiler
         this.projectsList = this.projectCompiler.projectsList
         this.userProjectsList = this.projectCompiler.userProjectsList
-        this.displayBox = document.getElementById('displayBox')
+        this.taskDisplayBox = document.getElementById('taskDisplayBox')
     }
     
     createSideBarDisplay(){
@@ -25,6 +25,7 @@ class DisplayController {
 
             userProjectDisplay.appendChild(projectItem)
         })
+        return userProjectDisplay
     }
 
     clearSideBarDisplay(){
@@ -36,29 +37,42 @@ class DisplayController {
     }
 
     createProjectLoadDisplay(){
-        this.projectCompiler.all.taskList.push(new Task('Mock', '05/15/2022', 'Mid', '', this.projectCompiler.all.title))
+        this.projectCompiler.all.taskList.push(new Task('Mock', '05/15/2022', 'medium', '', this.projectCompiler.all.title))
 
-        this.displayBox.append(this.projectsList[0].createProjectDisplay())    
+        this.taskDisplayBox.append(this.projectsList[0].createProjectDisplay())    
+    }
+
+    createProjectDisplay(i){
+
+        this.taskDisplayBox.append(this.projectsList[i].createProjectDisplay())    
     }
 
     changeProjectDisplay(i) {
         this.clearProjectDisplay()
 
-        this.displayBox.append(this.projectsList[i].createProjectDisplay())
+        this.taskDisplayBox.append(this.projectsList[i].createProjectDisplay())
     }
 
-    newProjectDisplay(i) {
+    newProjectDisplay() {
         this.clearProjectDisplay()
 
-        this.displayBox.append(this.userProjectsList[this.userProjectsList.length-1].createProjectDisplay())
+        this.taskDisplayBox.append(this.projectsList[this.projectsList.length-1].createProjectDisplay())
 
-        console.log(this.userProjectsList[this.userProjectsList.length-1].title)
+        console.log(this.projectsList[this.projectsList.length-1].title)
     }
 
     clearProjectDisplay(){
-        while(this.displayBox.hasChildNodes()){
-            this.displayBox.removeChild(this.displayBox.lastChild)
+        while(this.taskDisplayBox.hasChildNodes()){
+            this.taskDisplayBox.removeChild(this.taskDisplayBox.lastChild)
         }
+    }
+
+    expandTask(j, i){
+        this.projectCompiler.expandTask(j,i)
+    }
+
+    deleteTask(i, j){
+        this.projectCompiler.deleteTask(i, j)
     }
 }
 

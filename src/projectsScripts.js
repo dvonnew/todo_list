@@ -2,9 +2,10 @@ import {Task} from './tasksScripts'
 
 class Project {
 
-    constructor(title){
+    constructor(title, id){
         this.title = title
         this.taskList = []
+        this.id = id
     }
 
     addTask (){
@@ -22,6 +23,10 @@ class Project {
         this.taskList.splice(i,1)
     }
 
+    expandTask(i){
+        this.taskList[i].createExpandDisplay()
+    }
+
     // sortTasksbyDate(){
 
     // }
@@ -36,16 +41,13 @@ class Project {
         const title = document.createElement('h1')
         const taskListDisplay = document.createElement('div')
         const tasklistDisplayHeader = document.createElement('div')
-        const addTaskButton = document.createElement('button')
 
         title.innerHTML = this.title
-
-        addTaskButton.id = 'addTaskButton'
-        addTaskButton.innerHTML = '+  Add Task'
+        title.id = 'displayTitle'
+        title.dataset.index = this.id
 
         tasklistDisplayHeader.id = 'taskDisplayHeader'
         tasklistDisplayHeader.appendChild(title)
-        tasklistDisplayHeader.appendChild(addTaskButton)
 
         taskListDisplay.id = 'taskListDisplay'
         taskListDisplay.appendChild(tasklistDisplayHeader)
@@ -55,6 +57,7 @@ class Project {
             taskItem.dataset.index = i
             taskListDisplay.appendChild(taskItem)
         })
+
         return taskListDisplay
     }
 }

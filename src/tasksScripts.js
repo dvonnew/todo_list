@@ -33,7 +33,7 @@ class Task {
         return this.title
     }
 
-    // priorityChange(){
+    // changePriority(){
     //     this.priority = 
     // }
 
@@ -42,12 +42,12 @@ class Task {
     createTaskDisplay() {
         const taskDisplay = document.createElement('div')
         const taskPriority = document.createElement('div')
-        const taskCompletion = document.createElement('div')
         const taskTitle = document.createElement('div')
         const taskDueDate = document.createElement('div')
-        const taskEdit = document.createElement('div')
+        const taskCompletion = document.createElement('div')
+        const taskDelete = document.createElement('button')
 
-        taskPriority.className = `priority ${this.priority}`
+        taskPriority.className = `taskPriority ${this.priority}`
         
         taskCompletion.className = `${this.completionStatus}`
 
@@ -57,16 +57,60 @@ class Task {
         taskDueDate.className = 'taskDueDate'
         taskDueDate.innerHTML = `${this.dueDate.toLocaleDateString('en-US')}`
 
-        taskEdit.className = 'taskEditor'
+        taskDelete.className = 'deleteButton'
+        taskDelete.innerHTML = 'X'
 
         taskDisplay.className = 'taskDisplay'
         taskDisplay.appendChild(taskPriority)
-        taskDisplay.appendChild(taskCompletion)
         taskDisplay.appendChild(taskTitle)
         taskDisplay.appendChild(taskDueDate)
-        taskDisplay.appendChild(taskEdit)
+        taskDisplay.appendChild(taskCompletion)
+        taskDisplay.appendChild(taskDelete)
 
         return taskDisplay
+    }
+
+    createExpandDisplay(){
+        this.clearTaskDisplay()
+
+        const taskDisplay = document.querySelector('.taskDisplay')
+        const taskTitle = document.createElement('div')
+        const taskDescription = document.createElement('div')
+        const taskPriority = document.createElement('div')
+        const taskDueDate = document.createElement('div')
+        const taskCompletion = document.createElement('div')
+        const editButton = document.createElement('button')
+
+        taskCompletion.className = `${this.completionStatus}`
+
+        taskTitle.className = 'taskTitle-Extended'
+        taskTitle.innerHTML = `${this.title}`
+
+        taskDescription.className = 'taskDescription'
+        taskDescription.innerHTML = `${this.taskDescription}`
+
+        taskPriority.className = `taskPriority-Extended ${this.priority}`
+
+        taskDueDate.className = 'taskDueDate-Extended'
+        taskDueDate.innerHTML = `${this.dueDate.toLocaleDateString('en-US')}`
+
+        editButton.id = 'editButton'
+        editButton.innerHTML = 'Edit'
+
+        taskDisplay.className = 'taskDisplay-Extended'
+        taskDisplay.appendChild(taskTitle)
+        taskDisplay.appendChild(taskDescription)
+        taskDisplay.appendChild(taskPriority)
+        taskDisplay.appendChild(taskDueDate)
+        taskDisplay.appendChild(editButton)
+    }
+
+    clearTaskDisplay(){
+        const taskDisplay = document.querySelector('.taskDisplay')
+
+        while (taskDisplay.hasChildNodes()){
+            taskDisplay.removeChild(taskDisplay.lastChild)
+        }
     }
 }
 
