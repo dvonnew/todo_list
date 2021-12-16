@@ -12,10 +12,11 @@ class ProjectsCompiler {
 
     createNewProject() {
         let title = prompt('Project/List Name?')
-        let id = this.userProjectsList.length
+        let id = this.userProjectsList.length + 3
 
-        const newProject = new Project(title, id + length(this.projectsList))
+        const newProject = new Project(title, id)
 
+        this.projectsList.push(newProject)
         this.userProjectsList.push(newProject)
     }
 
@@ -25,25 +26,17 @@ class ProjectsCompiler {
     }
 
     addTask(projectIndex) {
-        if (projectIndex < 3) {
-            this.projectsList[projectIndex].addTask()
-        } else {
-            this.userProjectsList[projectIndex].addTask()
-        }
+        this.projectsList[projectIndex].addTask()
         this.compileAllTasks()
     }
 
     expandTask(projectIndex, taskIndex) {
-        if (projectIndex < 3) {
-            this.projectsList[projectIndex].expandTask(taskIndex)
-        } else {
-            this.userProjectsList[projectIndex].expandTask(taskIndex)
-        }
+        this.projectsList[projectIndex].expandTask(taskIndex)
     }
 
     compileAllTasks() {
-        // this.all.taskList.splice(this.all.taskList.length + 1, this.all.taskList.length - 1)
-        this.all.taskList = []
+        this.all.taskList.splice(this.all.taskList.length + 1, this.all.taskList.length - 1)
+        // this.all.taskList = []
 
         this.userProjectsList.forEach(project => {
             project.taskList.forEach(task => {

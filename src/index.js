@@ -9,25 +9,35 @@ class App {
 
     run() {
         this.display.createSideBarDisplay()
-        this.display.createProjectLoadDisplay()
+        this.display.createProjectListDisplay()
 
         let addTaskButton = document.getElementById('addTaskButton')
+        let defaultNavButtons = document.querySelectorAll('.default.navButton')
+        console.log(defaultNavButtons)
+
+        defaultNavButtons.forEach((button, i)=> {
+            button.addEventListener('click', () => {
+                this.display.changeProjectDisplay(i)
+            })
+        })
 
         addTaskButton.addEventListener('click', () => {
             let i = document.getElementById('displayTitle').dataset.index
             this.addTask(i)
         })
 
+        let addProjectButton = document.getElementById('addProjectButton')
+
+        addProjectButton.addEventListener('click', () => {
+            this.display.addProject()
+        })
+
+    
         this.setExpandTaskDisplayButton()
 
         this.setDeleteTaskButton()
     }
 
-    addProject() {
-        this.display.projectsCompiler.createNewProject()
-        this.display.createSideBarDisplay()
-        this.display.newProjectDisplay()
-    }
 
     addTask() {
         let i = parseInt(document.getElementById('displayTitle').dataset.index)

@@ -12,25 +12,27 @@ class DisplayController {
         this.clearSideBarDisplay()
 
         const userProjectsListElement = document.getElementById('userProjectsList')
+
         this.projectsCompiler.userProjectsList.forEach((project, i) => {
-            const projectItem = document.createElement('button')
+            let projectButton = document.createElement('button')
 
-            projectItem.className = 'navButton list'
-            projectItem.innerHTML = `${project.title}`
-            projectItem.dataset.index = i
+            projectButton.className = 'navButton list'
+            projectButton.innerHTML = `${project.title}`
+            projectButton.dataset.index = i +3
 
-            projectItem.addEventListener('click', () => {
-                changeProjectDisplay(i)
+            projectButton.addEventListener('click', () => {
+                this.changeProjectDisplay(i+3)
             })
 
-            userProjectsListElement.appendChild(projectItem)
+            userProjectsListElement.appendChild(projectButton)
         })
 
-        let addProjectButton = document.getElementById('addProjectButton')
+    }
 
-        addProjectButton.addEventListener('click', () => {
-            this.addProject()
-        })
+    addProject() {
+        this.projectsCompiler.createNewProject()
+        this.createSideBarDisplay()
+        this.newProjectDisplay()
     }
 
     clearSideBarDisplay() {
@@ -41,7 +43,7 @@ class DisplayController {
         }
     }
 
-    createProjectLoadDisplay() {
+    createProjectListDisplay() {
         this.projectsCompiler.all.taskList.push(new Task('Mock', '05/15/2022', 'medium', '', this.projectsCompiler.all.title))
 
         this.taskDisplayBox.append(this.projectsCompiler.projectsList[0].createProjectDisplay())
@@ -52,8 +54,8 @@ class DisplayController {
     }
 
     changeProjectDisplay(i) {
-        clearProjectDisplay()
-
+        this.clearProjectDisplay()
+        console.log(i)
         this.taskDisplayBox.append(this.projectsCompiler.projectsList[i].createProjectDisplay())
     }
 
