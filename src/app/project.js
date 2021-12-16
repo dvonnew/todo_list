@@ -1,14 +1,14 @@
-import {Task} from './tasksScripts'
+import { Task } from './task'
 
 class Project {
 
-    constructor(title, id){
+    constructor(title, id) {
         this.title = title
         this.taskList = []
         this.id = id
     }
 
-    addTask (){
+    addTask() {
         let title = prompt('Task Title')
         let dueDate = prompt('Due Date (mm/dd/yyyy)')
         let priority = prompt('Priority (High, Medium, Low)')
@@ -19,11 +19,11 @@ class Project {
         this.taskList.push(newTask)
     }
 
-    deleteTask(i){
-        this.taskList.splice(i,1)
+    deleteTask(i) {
+        this.taskList.splice(i, 1)
     }
 
-    expandTask(i){
+    expandTask(i) {
         this.taskList[i].createExpandDisplay()
     }
 
@@ -37,7 +37,7 @@ class Project {
 
     //Project DOM Methods//
 
-    createProjectDisplay(){
+    createProjectDisplay() {
         const title = document.createElement('h1')
         const taskListDisplay = document.createElement('div')
         const tasklistDisplayHeader = document.createElement('div')
@@ -52,7 +52,7 @@ class Project {
         taskListDisplay.id = 'taskListDisplay'
         taskListDisplay.appendChild(tasklistDisplayHeader)
 
-        this.taskList.forEach((task, i) =>{
+        this.taskList.forEach((task, i) => {
             let taskItem = task.createTaskDisplay()
             taskItem.dataset.index = i
             taskListDisplay.appendChild(taskItem)
@@ -62,4 +62,4 @@ class Project {
     }
 }
 
-export {Project}
+export { Project }

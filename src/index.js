@@ -1,88 +1,76 @@
-import {DisplayController} from './dispalyControllerScripts'
+import { DisplayController } from './dom/displayController'
 
 
-class RunApp {
-    
-    constructor(){
+class App {
+
+    constructor() {
         this.display = new DisplayController()
     }
 
-    runTaskList() {
+    run() {
         this.display.createSideBarDisplay()
-        this.display.createProjectLoadDisplay()
-        
-        let addTaskButton = document.getElementById('addTaskButton')
-        let addProjectButton = document.getElementById('addProjectButton')
+        this.display.createProjectListDisplay()
 
-        addProjectButton.addEventListener('click', ()=>{
-            this.addProject()
+        let addTaskButton = document.getElementById('addTaskButton')
+        let defaultNavButtons = document.querySelectorAll('.default.navButton')
+        console.log(defaultNavButtons)
+
+        defaultNavButtons.forEach((button, i)=> {
+            button.addEventListener('click', () => {
+                this.display.changeProjectDisplay(i)
+            })
         })
 
-        addTaskButton.addEventListener('click', ()=>{
+        addTaskButton.addEventListener('click', () => {
             let i = document.getElementById('displayTitle').dataset.index
             this.addTask(i)
         })
 
-        this.changeProject()
+        let addProjectButton = document.getElementById('addProjectButton')
 
-        this.expandTaskDisplay()
+        addProjectButton.addEventListener('click', () => {
+            this.display.addProject()
+        })
 
-        this.deleteTask()
+    
+        this.setExpandTaskDisplayButton()
+
+        this.setDeleteTaskButton()
     }
 
-    addProject(){
-        this.display.projectCompiler.createNewProject()
-        this.display.createSideBarDisplay()
-        this.display.newProjectDisplay()
-    }
 
-    addTask(){
+    addTask() {
         let i = parseInt(document.getElementById('displayTitle').dataset.index)
-        this.display.projectCompiler.addTask(i) 
+        this.display.projectsCompiler.addTask(i)
         this.display.changeProjectDisplay(i)
     }
 
-    changeProject(){
-        let navButton = document.getElementsByClassName('navButton')
-        
-        for (let i=0; i < navButton.length;i++){
-            navButton[i].addEventListener('click', ()=>{
-                this.display.changeProjectDisplay(i)
-                console.log(navButton)
-            })
-        }
-    }
-
-    expandTaskDisplay(){
+    setExpandTaskDisplayButton() {
         let taskDisplayList = document.getElementsByClassName('taskTitle')
 
-        for (let i=0; i < taskDisplayList.length;i++){
-            taskDisplayList[i].addEventListener('click', ()=>{
+        for (let i = 0; i < taskDisplayList.length; i++) {
+            taskDisplayList[i].addEventListener('click', () => {
                 let j = document.getElementById('displayTitle').dataset.index
                 this.display.expandTask(j, i)
             })
         }
     }
 
-    // deleteProject(i){
-
-    // }
-
-    deleteTask(){
+    setDeleteTaskButton() {
         let tasksList = document.getElementsByClassName('deleteButton')
 
-        for (let i=0; i < tasksList.length;i++){
-            tasksList[i].addEventListener('click', ()=>{
+        for (let i = 0; i < tasksList.length; i++) {
+            tasksList[i].addEventListener('click', () => {
                 let j = document.getElementById('displayTitle').dataset.index
                 this.display.deleteTask(i, j)
                 this.display.changeProjectDisplay(j)
             })
         }
 
-        
+
     }
 }
 
-const taskList = new RunApp
+const taskList = new App
 
-taskList.runTaskList()
+taskList.run()
