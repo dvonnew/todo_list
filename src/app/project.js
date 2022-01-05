@@ -19,13 +19,23 @@ class Project {
         this.taskList.push(newTask)
     }
 
+    getTasks() {
+        this.taskList.forEach(task =>{
+            return task
+        })
+    }
+
     deleteTask(i) {
         this.taskList.splice(i, 1)
     }
 
-    expandTask(i) {
-        this.taskList[i].createExpandDisplay()
+    completeTask(i) {
+        this.taskList[i].changeCompletionStatus()
     }
+
+    // expandTask(i) {
+    //     this.taskList[i].createExpandDisplay()
+    // }
 
     // sortTasksbyDate(){
 
@@ -34,32 +44,6 @@ class Project {
     // sortTasksbyPriority(){
 
     // }
-
-    //Project DOM Methods//
-
-    createProjectDisplay() {
-        const title = document.createElement('h1')
-        const taskListDisplay = document.createElement('div')
-        const tasklistDisplayHeader = document.createElement('div')
-
-        title.innerHTML = this.title
-        title.id = 'displayTitle'
-        title.dataset.index = this.id
-
-        tasklistDisplayHeader.id = 'taskDisplayHeader'
-        tasklistDisplayHeader.appendChild(title)
-
-        taskListDisplay.id = 'taskListDisplay'
-        taskListDisplay.appendChild(tasklistDisplayHeader)
-
-        this.taskList.forEach((task, i) => {
-            let taskItem = task.createTaskDisplay()
-            taskItem.dataset.index = i
-            taskListDisplay.appendChild(taskItem)
-        })
-
-        return taskListDisplay
-    }
 }
 
 export { Project }

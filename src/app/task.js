@@ -2,13 +2,27 @@ import '../style.css'
 
 class Task {
 
-    constructor(title, dueDate, priority, description, project){
+    constructor(title, dueDate, priority){
         this.title = title
         this.dueDate = new Date (Date.parse(dueDate))
         this.priority = priority
-        this.description = description
-        this.project = project
         this.completionStatus = 'no'
+    }
+
+    getTitle (){
+        return this.title
+    }
+
+    getDate (){
+        return this.dueDate.toLocaleDateString('en-US')
+    }
+
+    getPriority (){
+        return this.priority
+    }
+
+    getCompletionStatus(){
+        return this.completionStatus
     }
 
     changeCompletionStatus (){
@@ -21,17 +35,17 @@ class Task {
         return this.complete
     }
 
-    changeDate(){
-        let newDueDate = prompt('Due Date (mm/dd/yyyy)')
+    // changeDate(){
+    //     let newDueDate = prompt('Due Date (mm/dd/yyyy)')
 
-        this.date = new Date (Date.parse(newDueDate))
-        return this.date
-    }
+    //     this.date = new Date (Date.parse(newDueDate))
+    //     return this.date
+    // }
 
-    changeTitle(){
-        this.title = prompt()
-        return this.title
-    }
+    // changeTitle(){
+    //     this.title = prompt()
+    //     return this.title
+    // }
 
     // changePriority(){
     //     this.priority = 
@@ -40,6 +54,7 @@ class Task {
     //Task DOM Methods//
 
     createTaskDisplay() {
+        
         const taskDisplay = document.createElement('div')
         const taskPriority = document.createElement('div')
         const taskTitle = document.createElement('div')
@@ -70,40 +85,45 @@ class Task {
         return taskDisplay
     }
 
-    createExpandDisplay(){
-        this.clearTaskDisplay()
+    // createExpandDisplay(){
+    //     this.clearTaskDisplay()
 
-        const taskDisplay = document.querySelector('.taskDisplay')
-        const taskTitle = document.createElement('div')
-        const taskDescription = document.createElement('div')
-        const taskPriority = document.createElement('div')
-        const taskDueDate = document.createElement('div')
-        const taskCompletion = document.createElement('div')
-        const editButton = document.createElement('button')
+    //     const taskDisplay = document.querySelector('.taskDisplay')
+    //     const taskTitle = document.createElement('div')
+    //     const taskDescription = document.createElement('div')
+    //     const taskPriority = document.createElement('div')
+    //     const taskDueDate = document.createElement('div')
+    //     const taskCompletion = document.createElement('div')
+    //     const editButton = document.createElement('button')
+    //     const closeButton = document.createElement('button')
 
-        taskCompletion.className = `${this.completionStatus}`
+    //     taskCompletion.className = `${this.completionStatus}`
 
-        taskTitle.className = 'taskTitle-Extended'
-        taskTitle.innerHTML = `${this.title}`
+    //     taskTitle.className = 'taskTitle-Extended'
+    //     taskTitle.innerHTML = `${this.title}`
 
-        taskDescription.className = 'taskDescription'
-        taskDescription.innerHTML = `${this.taskDescription}`
+    //     taskDescription.className = 'taskDescription'
+    //     taskDescription.innerHTML = `${this.taskDescription}`
 
-        taskPriority.className = `taskPriority-Extended ${this.priority}`
+    //     taskPriority.className = `taskPriority-Extended ${this.priority}`
 
-        taskDueDate.className = 'taskDueDate-Extended'
-        taskDueDate.innerHTML = `${this.dueDate.toLocaleDateString('en-US')}`
+    //     taskDueDate.className = 'taskDueDate-Extended'
+    //     taskDueDate.innerHTML = `${this.dueDate.toLocaleDateString('en-US')}`
 
-        editButton.id = 'editButton'
-        editButton.innerHTML = 'Edit'
+    //     editButton.id = 'editButton'
+    //     editButton.innerHTML = 'Edit'
 
-        taskDisplay.className = 'taskDisplay-Extended'
-        taskDisplay.appendChild(taskTitle)
-        taskDisplay.appendChild(taskDescription)
-        taskDisplay.appendChild(taskPriority)
-        taskDisplay.appendChild(taskDueDate)
-        taskDisplay.appendChild(editButton)
-    }
+    //     closeButton.id = 'closeButton'
+    //     closeButton.innerHTML = 'Close'
+
+    //     taskDisplay.className = 'taskDisplay-Extended'
+    //     taskDisplay.appendChild(taskTitle)
+    //     taskDisplay.appendChild(taskDescription)
+    //     taskDisplay.appendChild(taskPriority)
+    //     taskDisplay.appendChild(taskDueDate)
+    //     taskDisplay.appendChild(editButton)
+    //     taskDisplay.appendChild(closeButton)
+    // }
 
     clearTaskDisplay(){
         const taskDisplay = document.querySelector('.taskDisplay')

@@ -22,32 +22,55 @@ class ProjectsCompiler {
 
     deleteProject(i) {
         this.userProjectsList.splice(i)
-        this.compileAllTasks()
+        this.compileDefaultLists()
     }
 
     addTask(projectIndex) {
         this.projectsList[projectIndex].addTask()
-        this.compileAllTasks()
-    }
-
-    expandTask(projectIndex, taskIndex) {
-        this.projectsList[projectIndex].expandTask(taskIndex)
-    }
-
-    compileAllTasks() {
-        this.all.taskList.splice(this.all.taskList.length + 1, this.all.taskList.length - 1)
-        // this.all.taskList = []
-
-        this.userProjectsList.forEach(project => {
-            project.taskList.forEach(task => {
-                this.all.taskList.push(task)
-            })
-        })
+        this.compileDefaultLists()
     }
 
     deleteTask(projectIndex, taskIndex) {
         this.projectsList[projectIndex].deleteTask(taskIndex)
         this.compileAllTasks()
+    }
+
+    completeTask(projectIndex, taskIndex) {
+        this.taskList[projectIndex].changeCompletionStatus(taskIndex)
+    }
+
+    // expandTask(projectIndex, taskIndex) {
+    //     this.projectsList[projectIndex].expandTask(taskIndex)
+    // }
+
+    compileDefaultLists (i){
+        this.compileAllTasks(i)
+        this.compileTodaysTasks()
+    }
+
+    compileAllTasks() {
+
+        this.userProjectsList.forEach(project => {
+            project.taskList.forEach(task => {
+                if (this.all.taskList.includes(task)){
+                    return
+                }
+                this.all.taskList.push(task)
+            })
+        })
+    }
+
+    compileTodaysTasks (){
+        let dateTime = new Date
+        let currentDate = `${(dateTime.getMonth()+1)}/${dateTime.getDate()}/${dateTime.getFullYear()}`
+
+        this.today.taskList = []
+
+        this.all.taskList.forEach(task =>{
+            if(task.dueDate.toLocaleDateString('en-US') === currentDate){
+            this.today.taskList.push(task)
+            }
+        })
     }
 
     // compileTodaysTasks(){

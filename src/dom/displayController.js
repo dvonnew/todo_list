@@ -18,7 +18,7 @@ class DisplayController {
 
             projectButton.className = 'navButton list'
             projectButton.innerHTML = `${project.title}`
-            projectButton.dataset.index = i +3
+            projectButton.dataset.index = i+3
 
             projectButton.addEventListener('click', () => {
                 this.changeProjectDisplay(i+3)
@@ -29,10 +29,70 @@ class DisplayController {
 
     }
 
+    createDefaultDisplay() {
+        this.projectsCompiler.all.taskList.push(new Task('Mock', '05/15/2022', 'medium', '', this.projectsCompiler.all.title))
+
+        this.taskDisplayBox.append(this.createDefaultDisplay(this.projectsCompiler.all))
+    }
+
+    createTaskListDisplay(project) {
+        const title = document.createElement('h1')
+        const taskListDisplay = document.createElement('div')
+        const tasklistDisplayHeader = document.createElement('div')
+
+        title.innerHTML = project.title
+        title.id = 'displayTitle'
+        title.dataset.index = project.id
+
+        tasklistDisplayHeader.id = 'taskDisplayHeader'
+        tasklistDisplayHeader.appendChild(title)
+
+        taskListDisplay.id = 'taskListDisplay'
+        taskListDisplay.appendChild(tasklistDisplayHeader)
+
+        project.taskList.forEach((task) => {
+            taskListDisplay.appendChild(this.createTaskDisplay(task))
+        })
+
+        return taskListDisplay
+    }
+
+    createTaskDisplay(task) {
+        
+        const taskDisplay = document.createElement('div')
+        const taskPriority = document.createElement('div')
+        const taskTitle = document.createElement('div')
+        const taskDueDate = document.createElement('div')
+        const taskCompletionStatus = document.createElement('div')
+        const taskDeleteButton = document.createElement('button')
+
+        taskPriority.className = `taskPriority ${task.getPriority()}`
+        
+        taskCompletionStatus.className = `${task.getCompletionStatus()}`
+
+        taskTitle.className = 'taskTitle'
+        taskTitle.innerHTML = `${task.getTitle()}`
+
+        taskDueDate.className = 'taskDueDate'
+        taskDueDate.innerHTML = `${task.getDate()}`
+
+        taskDeleteButton.className = 'deleteButton'
+        taskDelete.innerHTML = 'X'
+
+        taskDisplay.className = 'taskDisplay'
+        taskDisplay.appendChild(taskPriority)
+        taskDisplay.appendChild(taskTitle)
+        taskDisplay.appendChild(taskDueDate)
+        taskDisplay.appendChild(taskCompletionStatus)
+        taskDisplay.appendChild(taskDelete)
+
+        return taskDisplay
+    }
+
     addProject() {
         this.projectsCompiler.createNewProject()
         this.createSideBarDisplay()
-        this.newProjectDisplay()
+        this.changeProjectDisplay(this.projectsCompiler.projectsList[this.projectsCompiler.projectsList.length-1].id)
     }
 
     clearSideBarDisplay() {
@@ -45,26 +105,12 @@ class DisplayController {
 
     createProjectListDisplay() {
         this.projectsCompiler.all.taskList.push(new Task('Mock', '05/15/2022', 'medium', '', this.projectsCompiler.all.title))
-
-        this.taskDisplayBox.append(this.projectsCompiler.projectsList[0].createProjectDisplay())
-    }
-
-    createProjectDisplay(i) {
-        this.taskDisplayBox.append(this.projectsCompiler.projectsList[i].createProjectDisplay())
+        this.taskDisplayBox.append(this.createTaskListDisplay(this.projectsCompiler.projectsList[0]))
     }
 
     changeProjectDisplay(i) {
         this.clearProjectDisplay()
-        console.log(i)
-        this.taskDisplayBox.append(this.projectsCompiler.projectsList[i].createProjectDisplay())
-    }
-
-    newProjectDisplay() {
-        this.clearProjectDisplay()
-
-        this.taskDisplayBox.append(this.projectsCompiler.projectsList[this.projectsCompiler.projectsList.length - 1].createProjectDisplay())
-
-        console.log(this.projectsCompiler.projectsList[this.projectsCompiler.projectsList.length - 1].title)
+        this.taskDisplayBox.append(this.createTaskListDisplay(this.projectsCompiler.projectsList[i]))
     }
 
     clearProjectDisplay() {
@@ -73,9 +119,9 @@ class DisplayController {
         }
     }
 
-    expandTask(projectIndex, taskIndex) {
-        this.projectsCompiler.expandTask(projectIndex, taskIndex)
-    }
+    // expandTask(projectIndex, taskIndex) {
+    //     this.projectsCompiler.expandTask(projectIndex, taskIndex)
+    // }
 
     deleteTask(projectIndex, taskIndex) {
         this.projectsCompiler.deleteTask(projectIndex, taskIndex)

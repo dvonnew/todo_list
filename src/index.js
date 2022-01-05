@@ -13,7 +13,7 @@ class App {
 
         let addTaskButton = document.getElementById('addTaskButton')
         let defaultNavButtons = document.querySelectorAll('.default.navButton')
-        console.log(defaultNavButtons)
+        let addProjectButton = document.getElementById('addProjectButton')
 
         defaultNavButtons.forEach((button, i)=> {
             button.addEventListener('click', () => {
@@ -26,18 +26,14 @@ class App {
             this.addTask(i)
         })
 
-        let addProjectButton = document.getElementById('addProjectButton')
-
         addProjectButton.addEventListener('click', () => {
             this.display.addProject()
         })
-
     
         this.setExpandTaskDisplayButton()
 
         this.setDeleteTaskButton()
     }
-
 
     addTask() {
         let i = parseInt(document.getElementById('displayTitle').dataset.index)
@@ -66,8 +62,6 @@ class App {
                 this.display.changeProjectDisplay(j)
             })
         }
-
-
     }
 }
 

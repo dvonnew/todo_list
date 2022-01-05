@@ -199,19 +199,18 @@ body, html{
 }
 
 .taskPriority-Extended{
-    grid-column-start: 2;
-    grid-column-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 2;
     grid-row-start: 4;
     grid-row-end: 5;
 }
 
 .taskDescription{
-    grid-column-start: 2;
+    grid-column-start: 1;
     grid-column-end: 5;
     grid-row-start: 2;
     grid-row-end: 4;
     border: 1px solid rgb(255, 255, 255);
-    background-color: grey;
     border-radius: 5px;
     font-size: 13px;
 }
@@ -241,8 +240,8 @@ body, html{
 }
 
 .taskTitle-Extended{
-    grid-column-start: 2;
-    grid-column-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 2;
     grid-row-start: 1;
     grid-row-end: 2;
     justify-content: flex-start;
@@ -260,7 +259,7 @@ body, html{
 
 .taskDueDate-Extended{
     grid-column-start: 3;
-    grid-column-end: 5;
+    grid-column-end: 4;
     grid-row-start: 4;
     grid-row-end: 5;
     display: flex;
@@ -283,12 +282,25 @@ body, html{
 }
 
 #editButton{
-    grid-column-start: 4;
-    grid-column-end: 5;
+    grid-column-start: 5;
+    grid-column-end: 6;
     grid-row-start: 5;
     grid-row-end: 6;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+#closeButton{
+    grid-column-start: 6;
+    grid-column-end: 7;
+    grid-row-start: 5;
+    grid-row-end: 6;
+    display: flex;
+    justify-content: center;
     align-items: center;
     width: 40px;
     border: 1px solid gray;
