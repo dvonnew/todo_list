@@ -2,7 +2,7 @@ import '../style.css'
 
 class Task {
 
-    constructor(title, dueDate, priority){
+    constructor(title, dueDate, priority, id){
         this.title = title
         this.dueDate = new Date (Date.parse(dueDate))
         this.priority = priority
@@ -26,13 +26,13 @@ class Task {
     }
 
     changeCompletionStatus (){
-        if (this.complete.toLowerCase()== 'yes'){
-            this.complete = 'no'
+        if (this.completeStatus.toLowerCase()== 'yes'){
+            this.completionStatus = 'no'
         }
         else {
-            this.complete = 'yes'
+            this.completeStatus = 'yes'
         }
-        return this.complete
+        return this.completionStatus
     }
 
     // changeDate(){

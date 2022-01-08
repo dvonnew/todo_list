@@ -227,8 +227,26 @@ body, html{
     background-color: red;
 }
 
-.taskCompletion{
+.completionStatus{
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no{
+    height: 15px;
+    width: 15px;
+    border-radius: 5px;
+    border: .5px solid rgb(192, 192, 192);
+}
+
+.no:hover{
+    border-radius: 5px;
+    height: 15px;
+    width: 15px;
+    border: .5px solid grey;
+    background-color: grey;
 }
 
 .taskTitle{

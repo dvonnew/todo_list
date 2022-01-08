@@ -43,8 +43,8 @@ class ProjectsCompiler {
     //     this.projectsList[projectIndex].expandTask(taskIndex)
     // }
 
-    compileDefaultLists (i){
-        this.compileAllTasks(i)
+    compileDefaultLists (){
+        this.compileAllTasks()
         this.compileTodaysTasks()
     }
 

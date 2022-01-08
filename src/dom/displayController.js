@@ -30,9 +30,8 @@ class DisplayController {
     }
 
     createDefaultDisplay() {
-        this.projectsCompiler.all.taskList.push(new Task('Mock', '05/15/2022', 'medium', '', this.projectsCompiler.all.title))
-
-        this.taskDisplayBox.append(this.createDefaultDisplay(this.projectsCompiler.all))
+        this.projectsCompiler.all.taskList.push(new Task('Mock', '05/15/2022', 'medium', 0, this.projectsCompiler.all.title))
+        this.taskDisplayBox.append(this.createTaskListDisplay(this.projectsCompiler.all))
     }
 
     createTaskListDisplay(project) {
@@ -50,25 +49,28 @@ class DisplayController {
         taskListDisplay.id = 'taskListDisplay'
         taskListDisplay.appendChild(tasklistDisplayHeader)
 
-        project.taskList.forEach((task) => {
-            taskListDisplay.appendChild(this.createTaskDisplay(task))
+        project.taskList.forEach((task, i) => {
+            taskListDisplay.appendChild(this.createTaskDisplay(project, task, i))
         })
 
         return taskListDisplay
     }
 
-    createTaskDisplay(task) {
+    createTaskDisplay(project, task, i) {
         
         const taskDisplay = document.createElement('div')
         const taskPriority = document.createElement('div')
         const taskTitle = document.createElement('div')
         const taskDueDate = document.createElement('div')
         const taskCompletionStatus = document.createElement('div')
+        const completionButton = document.createElement('div')
         const taskDeleteButton = document.createElement('button')
 
         taskPriority.className = `taskPriority ${task.getPriority()}`
         
-        taskCompletionStatus.className = `${task.getCompletionStatus()}`
+        taskCompletionStatus.className = 'completionStatus'
+        taskCompletionStatus.appendChild(completionButton)
+        completionButton.className = `${task.getCompletionStatus()}`
 
         taskTitle.className = 'taskTitle'
         taskTitle.innerHTML = `${task.getTitle()}`
@@ -77,14 +79,19 @@ class DisplayController {
         taskDueDate.innerHTML = `${task.getDate()}`
 
         taskDeleteButton.className = 'deleteButton'
-        taskDelete.innerHTML = 'X'
+        taskDeleteButton.innerHTML = 'X'
+        taskDeleteButton.addEventListener('click', ()=>{
+            this.deleteTask(project.id, i)
+            console.log(task)
+        })
+
 
         taskDisplay.className = 'taskDisplay'
         taskDisplay.appendChild(taskPriority)
         taskDisplay.appendChild(taskTitle)
         taskDisplay.appendChild(taskDueDate)
         taskDisplay.appendChild(taskCompletionStatus)
-        taskDisplay.appendChild(taskDelete)
+        taskDisplay.appendChild(taskDeleteButton)
 
         return taskDisplay
     }
@@ -125,6 +132,7 @@ class DisplayController {
 
     deleteTask(projectIndex, taskIndex) {
         this.projectsCompiler.deleteTask(projectIndex, taskIndex)
+        this.changeProjectDisplay(projectIndex)
     }
 }
 

@@ -30,26 +30,13 @@ class App {
             this.display.addProject()
         })
     
-        this.setExpandTaskDisplayButton()
-
-        this.setDeleteTaskButton()
+        // this.setDeleteTaskButton()
     }
 
     addTask() {
         let i = parseInt(document.getElementById('displayTitle').dataset.index)
         this.display.projectsCompiler.addTask(i)
         this.display.changeProjectDisplay(i)
-    }
-
-    setExpandTaskDisplayButton() {
-        let taskDisplayList = document.getElementsByClassName('taskTitle')
-
-        for (let i = 0; i < taskDisplayList.length; i++) {
-            taskDisplayList[i].addEventListener('click', () => {
-                let j = document.getElementById('displayTitle').dataset.index
-                this.display.expandTask(j, i)
-            })
-        }
     }
 
     setDeleteTaskButton() {
