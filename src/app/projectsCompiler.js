@@ -36,12 +36,9 @@ class ProjectsCompiler {
     }
 
     completeTask(projectIndex, taskIndex) {
-        this.taskList[projectIndex].changeCompletionStatus(taskIndex)
+        this.projectsList[projectIndex].completeTask(taskIndex)
+        this.compileDefaultLists()
     }
-
-    // expandTask(projectIndex, taskIndex) {
-    //     this.projectsList[projectIndex].expandTask(taskIndex)
-    // }
 
     compileDefaultLists (){
         this.compileAllTasks()
@@ -49,7 +46,6 @@ class ProjectsCompiler {
     }
 
     compileAllTasks() {
-
         this.userProjectsList.forEach(project => {
             project.taskList.forEach(task => {
                 if (this.all.taskList.includes(task)){
@@ -72,10 +68,6 @@ class ProjectsCompiler {
             }
         })
     }
-
-    // compileTodaysTasks(){
-
-    // }
 
     // compileWeeksTasks(){
 

@@ -71,6 +71,24 @@ class DisplayController {
         taskCompletionStatus.className = 'completionStatus'
         taskCompletionStatus.appendChild(completionButton)
         completionButton.className = `${task.getCompletionStatus()}`
+        completionButton.addEventListener('click', ()=>{
+            this.completeTask(project.id, i)
+            console.log('clicked')
+
+            if(task.getCompletionStatus() == 'yes'){
+                taskDisplay.className = 'taskDisplay-Completed'
+            }
+            else{
+                taskDisplay.className = 'taskDisplay'
+            }
+        })
+
+        if(task.getCompletionStatus() == 'yes'){
+            taskDisplay.className = 'taskDisplay-Completed'
+        }
+        else{
+            taskDisplay.className = 'taskDisplay'
+        }
 
         taskTitle.className = 'taskTitle'
         taskTitle.innerHTML = `${task.getTitle()}`
@@ -85,8 +103,6 @@ class DisplayController {
             console.log(task)
         })
 
-
-        taskDisplay.className = 'taskDisplay'
         taskDisplay.appendChild(taskPriority)
         taskDisplay.appendChild(taskTitle)
         taskDisplay.appendChild(taskDueDate)
@@ -110,11 +126,6 @@ class DisplayController {
         }
     }
 
-    createProjectListDisplay() {
-        this.projectsCompiler.all.taskList.push(new Task('Mock', '05/15/2022', 'medium', '', this.projectsCompiler.all.title))
-        this.taskDisplayBox.append(this.createTaskListDisplay(this.projectsCompiler.projectsList[0]))
-    }
-
     changeProjectDisplay(i) {
         this.clearProjectDisplay()
         this.taskDisplayBox.append(this.createTaskListDisplay(this.projectsCompiler.projectsList[i]))
@@ -126,9 +137,10 @@ class DisplayController {
         }
     }
 
-    // expandTask(projectIndex, taskIndex) {
-    //     this.projectsCompiler.expandTask(projectIndex, taskIndex)
-    // }
+    completeTask(projectIndex, taskIndex) {
+        this.projectsCompiler.completeTask(projectIndex,taskIndex)
+        this.changeProjectDisplay(projectIndex)
+    }
 
     deleteTask(projectIndex, taskIndex) {
         this.projectsCompiler.deleteTask(projectIndex, taskIndex)

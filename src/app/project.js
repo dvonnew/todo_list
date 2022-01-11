@@ -32,10 +32,6 @@ class Project {
         this.taskList[i].changeCompletionStatus()
     }
 
-    // expandTask(i) {
-    //     this.taskList[i].createExpandDisplay()
-    // }
-
     // sortTasksbyDate(){
 
     // }

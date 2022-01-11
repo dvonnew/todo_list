@@ -9,7 +9,7 @@ class App {
 
     run() {
         this.display.createSideBarDisplay()
-        this.display.createProjectListDisplay()
+        this.display.createDefaultDisplay()
 
         let addTaskButton = document.getElementById('addTaskButton')
         let defaultNavButtons = document.querySelectorAll('.default.navButton')

@@ -182,27 +182,23 @@ body, html{
     vertical-align: middle;
 }
 
-.taskDisplay-Extended{
-    height: 150px;
-    width: 75%;
-    margin-bottom: 5px;
-    display: grid;
-    border-radius: 5px;
-    border: 3px solid rgb(255, 255, 255);
-    grid-template-columns: repeat(5, 1fr);
-    grid-auto-rows: 25px;
-}
-
 .taskPriority{
     height: 100%;
     border-radius: 3px;
 }
 
-.taskPriority-Extended{
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 4;
-    grid-row-end: 5;
+.taskDisplay-Completed{
+    height: 25px;
+    width: 100%;
+    color: white;
+    background-color: grey;
+    margin-bottom: 5px;
+    text-align: left;
+    display: grid;
+    border-radius: 5px;
+    border: 2px solid grey;
+    grid-template-columns: .25fr 5fr 2fr 1fr .5fr;
+    vertical-align: middle;
 }
 
 .taskDescription{
@@ -249,6 +245,22 @@ body, html{
     background-color: grey;
 }
 
+.yes{
+    border-radius: 5px;
+    height: 15px;
+    width: 15px;
+    border: .5px solid white;
+    background-color: grey;
+}
+
+.yes:hover{
+    height: 15px;
+    width: 15px;
+    border-radius: 5px;
+    border: .5px solid rgb(192, 192, 192);
+    background-color: rgb(231, 231, 231);
+}
+
 .taskTitle{
     height: 100%;
     font-size: 14px;
@@ -257,32 +269,11 @@ body, html{
     align-items: center;
 }
 
-.taskTitle-Extended{
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 2;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: 10px;
-    font-size: 16px;
-}
-
 .taskDueDate{
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-}
-
-.taskDueDate-Extended{
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 4;
-    grid-row-end: 5;
-    display: flex;
-    justify-content: center;
-    align-items: center
 }
 
 .deleteButton{
@@ -297,30 +288,4 @@ body, html{
 
 .deleteButton:hover{
     color: grey;
-}
-
-#editButton{
-    grid-column-start: 5;
-    grid-column-end: 6;
-    grid-row-start: 5;
-    grid-row-end: 6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    border: 1px solid gray;
-    border-radius: 5px;
-}
-
-#closeButton{
-    grid-column-start: 6;
-    grid-column-end: 7;
-    grid-row-start: 5;
-    grid-row-end: 6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    border: 1px solid gray;
-    border-radius: 5px;
 }
