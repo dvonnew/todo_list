@@ -7,21 +7,19 @@ class ProjectsCompiler {
         this.today = new Project('Today', 1)
         this.week = new Project('Week', 2)
         this.projectsList = [this.all, this.today, this.week]
-        this.userProjectsList = []
     }
 
     createNewProject() {
         let title = prompt('Project/List Name?')
-        let id = this.userProjectsList.length + 3
+        let id = this.projectsList.length
 
         const newProject = new Project(title, id)
 
         this.projectsList.push(newProject)
-        this.userProjectsList.push(newProject)
     }
 
     deleteProject(i) {
-        this.userProjectsList.splice(i)
+        this.projectsList.splice(i,1)
         this.compileDefaultLists()
     }
 
@@ -31,8 +29,15 @@ class ProjectsCompiler {
     }
 
     deleteTask(projectIndex, taskIndex) {
-        this.projectsList[projectIndex].deleteTask(taskIndex)
-        this.compileAllTasks()
+        let task = this.projectsList[projectIndex].taskList[taskIndex]
+
+        this.projectsList.forEach((project)=>{
+            if (project.taskList.includes(task)){
+                project.deleteTask(project.taskList.indexOf(task))
+            }
+        })
+
+        this.compileDefaultLists()
     }
 
     completeTask(projectIndex, taskIndex) {
@@ -46,13 +51,15 @@ class ProjectsCompiler {
     }
 
     compileAllTasks() {
-        this.userProjectsList.forEach(project => {
-            project.taskList.forEach(task => {
-                if (this.all.taskList.includes(task)){
-                    return
-                }
-                this.all.taskList.push(task)
-            })
+        this.projectsList.forEach((project, i) => {
+            if(i>2){
+                project.taskList.forEach(task => {
+                    if (this.all.taskList.includes(task)){
+                        return
+                    }
+                    this.all.taskList.push(task)
+                })
+            }
         })
     }
 

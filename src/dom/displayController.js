@@ -13,18 +13,20 @@ class DisplayController {
 
         const userProjectsListElement = document.getElementById('userProjectsList')
 
-        this.projectsCompiler.userProjectsList.forEach((project, i) => {
-            let projectButton = document.createElement('button')
+        this.projectsCompiler.projectsList.forEach((project, i) => {
+            if (i>2){
+                let projectButton = document.createElement('button')
 
-            projectButton.className = 'navButton list'
-            projectButton.innerHTML = `${project.title}`
-            projectButton.dataset.index = i+3
+                projectButton.className = 'navButton list'
+                projectButton.innerHTML = `${project.title}`
+                projectButton.dataset.index = i+3
 
-            projectButton.addEventListener('click', () => {
-                this.changeProjectDisplay(i+3)
-            })
+                projectButton.addEventListener('click', () => {
+                    this.changeProjectDisplay(i)
+                })
 
-            userProjectsListElement.appendChild(projectButton)
+                userProjectsListElement.appendChild(projectButton)
+            }
         })
 
     }
@@ -73,7 +75,6 @@ class DisplayController {
         completionButton.className = `${task.getCompletionStatus()}`
         completionButton.addEventListener('click', ()=>{
             this.completeTask(project.id, i)
-            console.log('clicked')
 
             if(task.getCompletionStatus() == 'yes'){
                 taskDisplay.className = 'taskDisplay-Completed'
@@ -100,7 +101,6 @@ class DisplayController {
         taskDeleteButton.innerHTML = 'X'
         taskDeleteButton.addEventListener('click', ()=>{
             this.deleteTask(project.id, i)
-            console.log(task)
         })
 
         taskDisplay.appendChild(taskPriority)
