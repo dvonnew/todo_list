@@ -23,8 +23,8 @@ class ProjectsCompiler {
         this.compileDefaultLists()
     }
 
-    addTask(projectIndex) {
-        this.projectsList[projectIndex].addTask()
+    addTask(projectIndex, title, dueDate, priority) {
+        this.projectsList[projectIndex].addTask(title, dueDate, priority)
         this.compileDefaultLists()
     }
 

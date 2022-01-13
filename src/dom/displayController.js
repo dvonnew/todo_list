@@ -24,7 +24,6 @@ class DisplayController {
                 projectButton.addEventListener('click', () => {
                     this.changeProjectDisplay(i)
                 })
-
                 userProjectsListElement.appendChild(projectButton)
             }
         })
@@ -110,6 +109,62 @@ class DisplayController {
         taskDisplay.appendChild(taskDeleteButton)
 
         return taskDisplay
+    }
+
+    createAddTaskDisplay() {
+        const taskDisplay = document.createElement('div')
+        const titleInput = document.createElement('input')
+        const dueDateInput = document.createElement('input')
+        const priorityInput = document.createElement('select')
+        const submitButton = document.createElement('button')
+        const cancelButton = document.createElement('button')
+
+        taskDisplay.className = 'addTaskDisplay'
+
+        titleInput.setAttribute('type', 'text')
+        titleInput.setAttribute('value', 'Task Title...')
+        titleInput.className = "titleInput"
+
+        dueDateInput.setAttribute('type', 'date')
+        dueDateInput.className = 'dueDateInput'
+
+        priorityInput.innerHTML = `
+            <option value='low'>Low</option> \n
+            <option value='medium'>Medium</option> \n
+            <option value='high'>High</option>`
+        priorityInput.className = 'priorityInput'
+
+        submitButton.id = 'submitButton'
+        submitButton.innerHTML = 'Submit'
+        submitButton.addEventListener('click', ()=>{
+            console.log('clicked')
+            if (titleInput.value == `Task Title...` || titleInput.value == ``){
+                alert('Please enter a task title')
+                return
+            }
+            let title = titleInput.value
+            let dueDate = dueDateInput.valueAsDate
+            let priority = priorityInput.value
+
+            this.submitAddTaskEventListener(title, dueDate, priority)
+        })
+
+        cancelButton.innerHTML = 'Cancel'
+        cancelButton.id = 'cancelButton'
+
+        taskDisplay.appendChild(titleInput)
+        taskDisplay.appendChild(dueDateInput)
+        taskDisplay.appendChild(priorityInput)
+        taskDisplay.appendChild(submitButton)
+        taskDisplay.appendChild(cancelButton)
+
+        taskListDisplay.appendChild(taskDisplay)
+    }
+
+    submitAddTaskEventListener(title, dueDate, priority){
+        let projectIndex = parseInt(document.getElementById('displayTitle').dataset.index)
+        this.projectsCompiler.addTask(projectIndex, title, dueDate, priority)
+        this.changeProjectDisplay(projectIndex)
     }
 
     addProject() {

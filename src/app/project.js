@@ -8,13 +8,9 @@ class Project {
         this.id = id
     }
 
-    addTask() {
-        let title = prompt('Task Title')
-        let dueDate = prompt('Due Date (mm/dd/yyyy)')
-        let priority = prompt('Priority (High, Medium, Low)')
-        let id = this.taskList.length
+    addTask(title, dueDate, priority) {
 
-        let newTask = new Task(title, dueDate, priority, id)
+        let newTask = new Task(title, dueDate, priority)
         this.taskList.push(newTask)
     }
 

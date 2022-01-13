@@ -171,7 +171,7 @@ body, html{
 /* task dislpay styles section */
 
 .taskDisplay{
-    height: 25px;
+    height: 30px;
     width: 100%;
     margin-bottom: 5px;
     text-align: left;
@@ -288,4 +288,57 @@ body, html{
 
 .deleteButton:hover{
     color: grey;
+}
+
+/* Add Task Display */
+
+.addTaskDisplay{
+    height: 30px;
+    width: 100%;
+    margin-bottom: 5px;
+    text-align: left;
+    display: grid;
+    border-radius: 5px;
+    border: 2px solid grey;
+    grid-template-columns: 4fr 4fr 2fr 1fr 1fr;
+    vertical-align: middle;
+}
+
+.titleInput{
+    border: none;
+    border-radius: 2px;
+    height: 90%;
+    font-size: 14px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.dueDateInput{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border:none;
+}
+
+.priorityInput{
+    height: 100%;
+    border: none;
+}
+
+#submitButton, #cancelButton{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+#cancelButton:hover, #submitButton:hover{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: grey;
+    color: white;
 }

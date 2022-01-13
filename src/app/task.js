@@ -2,7 +2,7 @@ import '../style.css'
 
 class Task {
 
-    constructor(title, dueDate, priority, id){
+    constructor(title, dueDate, priority){
         this.title = title
         this.dueDate = new Date (Date.parse(dueDate))
         this.priority = priority

@@ -22,33 +22,12 @@ class App {
         })
 
         addTaskButton.addEventListener('click', () => {
-            let i = document.getElementById('displayTitle').dataset.index
-            this.addTask(i)
+            this.display.createAddTaskDisplay()
         })
 
         addProjectButton.addEventListener('click', () => {
             this.display.addProject()
         })
-    
-        // this.setDeleteTaskButton()
-    }
-
-    addTask() {
-        let i = parseInt(document.getElementById('displayTitle').dataset.index)
-        this.display.projectsCompiler.addTask(i)
-        this.display.changeProjectDisplay(i)
-    }
-
-    setDeleteTaskButton() {
-        let tasksList = document.getElementsByClassName('deleteButton')
-
-        for (let i = 0; i < tasksList.length; i++) {
-            tasksList[i].addEventListener('click', () => {
-                let j = document.getElementById('displayTitle').dataset.index
-                this.display.deleteTask(i, j)
-                this.display.changeProjectDisplay(j)
-            })
-        }
     }
 }
 
