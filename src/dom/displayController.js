@@ -137,7 +137,6 @@ class DisplayController {
         submitButton.id = 'submitButton'
         submitButton.innerHTML = 'Submit'
         submitButton.addEventListener('click', ()=>{
-            console.log('clicked')
             if (titleInput.value == `Task Title...` || titleInput.value == ``){
                 alert('Please enter a task title')
                 return
@@ -151,6 +150,12 @@ class DisplayController {
 
         cancelButton.innerHTML = 'Cancel'
         cancelButton.id = 'cancelButton'
+        cancelButton.addEventListener('click', ()=>{
+            while (taskDisplay.hasChildNodes()){
+                taskDisplay.removeChild(taskDisplay.lastChild)
+            }
+            taskListDisplay.removeChild(taskDisplay)
+        })
 
         taskDisplay.appendChild(titleInput)
         taskDisplay.appendChild(dueDateInput)
