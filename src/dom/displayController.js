@@ -118,21 +118,28 @@ class DisplayController {
         const priorityInput = document.createElement('select')
         const submitButton = document.createElement('button')
         const cancelButton = document.createElement('button')
+        const today = new Date()
+        let currentDate = `${(today.getMonth()+1)}/${today.getDate()}/${today.getFullYear()}`
 
         taskDisplay.className = 'addTaskDisplay'
 
         titleInput.setAttribute('type', 'text')
         titleInput.setAttribute('value', 'Task Title...')
+        titleInput.setAttribute('required', '')
         titleInput.className = "titleInput"
 
         dueDateInput.setAttribute('type', 'date')
+        dueDateInput.setAttribute('required', '')
+        dueDateInput.setAttribute('pattern', `\d\d/\d\d/\d\d\d\d`)
         dueDateInput.className = 'dueDateInput'
 
         priorityInput.innerHTML = `
+            <option value=''>--</option> \n
             <option value='low'>Low</option> \n
             <option value='medium'>Medium</option> \n
             <option value='high'>High</option>`
         priorityInput.className = 'priorityInput'
+        priorityInput.setAttribute('required', '')
 
         submitButton.id = 'submitButton'
         submitButton.innerHTML = 'Submit'
@@ -142,7 +149,15 @@ class DisplayController {
                 return
             }
             let title = titleInput.value
+            if (dueDateInput.value == '' || dueDateInput.valueAsDate.toLocaleDateString(`en-us`) < currentDate){
+                alert('Please provide a date on or after the current date')
+                return
+            }
             let dueDate = dueDateInput.valueAsDate
+            if (priorityInput.value ==''){
+                alert('Please select a valid priority from the drop down')
+                return
+            }
             let priority = priorityInput.value
 
             this.submitAddTaskEventListener(title, dueDate, priority)

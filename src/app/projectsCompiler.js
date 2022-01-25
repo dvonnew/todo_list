@@ -1,4 +1,5 @@
 import { Project } from './project'
+import { toDate, isThisWeek, subDays } from 'date-fns'
 
 class ProjectsCompiler {
 
@@ -9,9 +10,17 @@ class ProjectsCompiler {
         this.projectsList = [this.all, this.today, this.week]
     }
 
+    getProjects (){
+        return this.projectsList
+    }
+
     createNewProject() {
         let title = prompt('Project/List Name?')
         let id = this.projectsList.length
+
+        if (title == null){
+           return title = prompt('Title cannot be empty. Please provide project title')
+        }
 
         const newProject = new Project(title, id)
 
@@ -48,6 +57,7 @@ class ProjectsCompiler {
     compileDefaultLists (){
         this.compileAllTasks()
         this.compileTodaysTasks()
+        this.compileWeeksTasks()
     }
 
     compileAllTasks() {
@@ -76,9 +86,16 @@ class ProjectsCompiler {
         })
     }
 
-    // compileWeeksTasks(){
+    compileWeeksTasks(){
+        this.week.taskList = []
 
-    // }
+        this.all.taskList.forEach(task =>{
+            if(isThisWeek(task.dueDate)){
+                this.week.taskList.push(task)
+            }
+        })
+
+    }
 }
 
 export { ProjectsCompiler }

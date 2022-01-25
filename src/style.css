@@ -314,6 +314,10 @@ body, html{
     align-items: center;
 }
 
+.invalid{
+    border: red;
+}
+
 .dueDateInput{
     height: 100%;
     display: flex;
